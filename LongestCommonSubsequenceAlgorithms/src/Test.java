@@ -20,8 +20,6 @@ public class Test {
 			int lcsLength = solver.lcsLength();
 
 			System.out.println(lcs + " " + lcsLength);
-
-			solver.reset();
 		}
 	}
 

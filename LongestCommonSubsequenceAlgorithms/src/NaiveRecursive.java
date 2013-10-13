@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author Jason A Smith <jas7553>
  * 
@@ -14,6 +16,8 @@ public class NaiveRecursive extends LcsSolver {
 
 	@Override
 	public String lcs() {
+		performanceMonitor.reset();
+
 		return lcs(x, y);
 	}
 
@@ -30,15 +34,15 @@ public class NaiveRecursive extends LcsSolver {
 
 		String lcs;
 
-		String xSub = new String(x, 0, x.length - 1);
-		String ySub = new String(y, 0, y.length - 1);
+		char[] xSub = Arrays.copyOf(x, x.length - 1);
+		char[] ySub = Arrays.copyOf(y, y.length - 1);
 
 		if (x[i - 1] == y[j - 1]) {
-			lcs = lcs(xSub.toCharArray(), ySub.toCharArray()) + x[i - 1];
+			lcs = lcs(xSub, ySub) + x[i - 1];
 
 		} else {
-			String lcsSub1 = lcs(new String(x).toCharArray(), ySub.toCharArray());
-			String lcsSub2 = lcs(xSub.toCharArray(), new String(y).toCharArray());
+			String lcsSub1 = lcs(x, ySub);
+			String lcsSub2 = lcs(xSub, y);
 
 			lcs = lcsSub1.length() > lcsSub2.length() ? lcsSub1 : lcsSub2;
 		}
@@ -52,14 +56,18 @@ public class NaiveRecursive extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new NaiveRecursive("A", "A");
+		LcsSolver solver = new NaiveRecursive("AGGTAB", "GXTXAYB");
 
 		String lcs = solver.lcs();
+		System.out.println("LCS: " + lcs);
+
+		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		solver.getPerformanceMonitor().reset();
+
 		int lcsLength = solver.lcsLength();
+		System.out.println("LCS length: " + lcsLength);
 
-		System.out.println(lcs);
-		System.out.println(lcsLength);
-
-		System.out.println(solver.getPerformanceMonitor().getRecursiveCallCount());
+		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		solver.getPerformanceMonitor().reset();
 	}
 }

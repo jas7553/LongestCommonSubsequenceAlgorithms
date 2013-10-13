@@ -22,16 +22,13 @@ public class DynamicProgramming extends LcsSolver {
 	@Override
 	public void setXY(String x, String y) {
 		super.setXY(x, y);
-
-		b = new DIRECTION[m + 1][n + 1];
-		c = new int[m + 1][n + 1];
+		
+		clearTables();
 	}
 
 	@Override
 	public String lcs() {
-		if (!hasBuiltTables()) {
-			buildTables();
-		}
+		buildTables();
 
 		return lcs(x.length, y.length);
 	}
@@ -55,20 +52,19 @@ public class DynamicProgramming extends LcsSolver {
 
 	@Override
 	public int lcsLength() {
-		if (!hasBuiltTables()) {
-			buildTables();
-		}
+		buildTables();
 
 		return c[m][n];
 	}
-
-	@Override
-	public void reset() {
+	
+	private void clearTables() {
 		b = new DIRECTION[m + 1][n + 1];
 		c = new int[m + 1][n + 1];
 	}
 
 	private void buildTables() {
+		clearTables();
+
 		for (int i = 0; i < m + 1; i++) {
 			c[i][0] = 0;
 		}
@@ -91,10 +87,6 @@ public class DynamicProgramming extends LcsSolver {
 				}
 			}
 		}
-	}
-
-	private boolean hasBuiltTables() {
-		return b[m][n] != null;
 	}
 
 	public void displayS() {

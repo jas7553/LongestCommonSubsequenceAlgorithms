@@ -34,10 +34,6 @@ public abstract class LcsSolver {
 
 	public abstract int lcsLength();
 
-	public void reset() {
-		performanceMonitor.reset();
-	}
-
 	public PerformanceMonitor getPerformanceMonitor() {
 		return performanceMonitor;
 	}
