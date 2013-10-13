@@ -22,15 +22,20 @@ public class DynamicProgramming extends LcsSolver {
 	@Override
 	public void setXY(String x, String y) {
 		super.setXY(x, y);
-		
+
 		clearTables();
 	}
 
 	@Override
 	public String lcs() {
-		buildTables();
+		performanceMonitor.startTimer();
 
-		return lcs(x.length, y.length);
+		buildTables();
+		String lcs = lcs(x.length, y.length);
+
+		performanceMonitor.endTimer();
+
+		return lcs;
 	}
 
 	private String lcs(int i, int j) {
@@ -52,11 +57,16 @@ public class DynamicProgramming extends LcsSolver {
 
 	@Override
 	public int lcsLength() {
-		buildTables();
+		performanceMonitor.startTimer();
 
-		return c[m][n];
+		buildTables();
+		int lcsLength = c[m][n];
+
+		performanceMonitor.endTimer();
+
+		return lcsLength;
 	}
-	
+
 	private void clearTables() {
 		b = new DIRECTION[m + 1][n + 1];
 		c = new int[m + 1][n + 1];
@@ -115,5 +125,22 @@ public class DynamicProgramming extends LcsSolver {
 			}
 			System.out.println();
 		}
+	}
+
+	public static void main(String... args) {
+		LcsSolver solver = new DynamicProgramming("AGGTAB", "GXTXAYB");
+
+		String lcs = solver.lcs();
+		System.out.println("LCS: " + lcs);
+		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
+		solver.getPerformanceMonitor().reset();
+		System.out.println();
+
+		int lcsLength = solver.lcsLength();
+		System.out.println("LCS length: " + lcsLength);
+		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
+		solver.getPerformanceMonitor().reset();
 	}
 }

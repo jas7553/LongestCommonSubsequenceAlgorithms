@@ -17,8 +17,12 @@ public class NaiveRecursive extends LcsSolver {
 	@Override
 	public String lcs() {
 		performanceMonitor.reset();
+		
+		performanceMonitor.startTimer();
+		String lcs = lcs(x, y);
+		performanceMonitor.endTimer();
 
-		return lcs(x, y);
+		return lcs;
 	}
 
 	private String lcs(char[] x, char[] y) {
@@ -60,14 +64,15 @@ public class NaiveRecursive extends LcsSolver {
 
 		String lcs = solver.lcs();
 		System.out.println("LCS: " + lcs);
-
 		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
 		solver.getPerformanceMonitor().reset();
+		System.out.println();
 
 		int lcsLength = solver.lcsLength();
 		System.out.println("LCS length: " + lcsLength);
-
 		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
+		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
 		solver.getPerformanceMonitor().reset();
 	}
 }
