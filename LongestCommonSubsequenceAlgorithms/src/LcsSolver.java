@@ -9,12 +9,16 @@ public abstract class LcsSolver {
 
 	protected int m;
 	protected int n;
-	
+
+	protected PerformanceMonitor performanceMonitor;
+
 	public LcsSolver() {
 		this("", "");
 	}
 
 	public LcsSolver(String x, String y) {
+		this.performanceMonitor = new PerformanceMonitor();
+
 		setXY(x, y);
 	}
 
@@ -29,7 +33,12 @@ public abstract class LcsSolver {
 	public abstract String lcs();
 
 	public abstract int lcsLength();
-	
+
 	public void reset() {
+		performanceMonitor.reset();
+	}
+
+	public PerformanceMonitor getPerformanceMonitor() {
+		return performanceMonitor;
 	}
 }

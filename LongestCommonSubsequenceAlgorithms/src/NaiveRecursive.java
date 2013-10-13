@@ -4,18 +4,12 @@
  */
 public class NaiveRecursive extends LcsSolver {
 
-	private PerformanceMonitor performanceMonitor;
-
 	public NaiveRecursive() {
 		super();
-
-		this.performanceMonitor = new PerformanceMonitor();
 	}
 
 	public NaiveRecursive(String x, String y) {
 		super(x, y);
-
-		this.performanceMonitor = new PerformanceMonitor();
 	}
 
 	@Override
@@ -57,17 +51,8 @@ public class NaiveRecursive extends LcsSolver {
 		return lcs().length();
 	}
 
-	@Override
-	public void reset() {
-		performanceMonitor.reset();
-	}
-
-	public PerformanceMonitor getPerformanceMonitor() {
-		return performanceMonitor;
-	}
-
 	public static void main(String... args) {
-		NaiveRecursive solver = new NaiveRecursive("A", "A");
+		LcsSolver solver = new NaiveRecursive("A", "A");
 
 		String lcs = solver.lcs();
 		int lcsLength = solver.lcsLength();
