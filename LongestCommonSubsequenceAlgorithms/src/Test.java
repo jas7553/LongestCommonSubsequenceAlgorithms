@@ -30,5 +30,7 @@ public class Test {
 		tester.test("AGGTAB", "GXTXAYB");
 		tester.test("ABCBDAB", "BDCABA");
 		tester.test("AAABBB", "CCAAACCBBBCC");
+
+		// test comment
 	}
 }
