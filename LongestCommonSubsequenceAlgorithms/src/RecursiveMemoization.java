@@ -17,7 +17,6 @@ public class RecursiveMemoization extends LcsSolver {
 	@Override
 	public String lcs() {
 		cache.clear();
-		performanceMonitor.resetRecursiveCallCount();
 
 		return lcs(x, y);
 	}
