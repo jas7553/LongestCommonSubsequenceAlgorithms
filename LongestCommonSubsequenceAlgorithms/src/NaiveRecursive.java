@@ -17,7 +17,7 @@ public class NaiveRecursive extends LcsSolver {
 	@Override
 	public String lcs() {
 		performanceMonitor.reset();
-		
+
 		performanceMonitor.startTimer();
 		String lcs = lcs(x, y);
 		performanceMonitor.endTimer();
