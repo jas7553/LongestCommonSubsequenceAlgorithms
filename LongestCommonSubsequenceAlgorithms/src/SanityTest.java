@@ -5,12 +5,12 @@ import java.util.Set;
  * @author Jason A Smith <jas7553>
  * 
  */
-public class Test {
+public class SanityTest {
 
 	private LcsSolver[] solvers;
 	private RandomStringGenerator generator;
 
-	public Test() {
+	public SanityTest() {
 		solvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming() };
 		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 10);
 	}
@@ -19,9 +19,8 @@ public class Test {
 		String x = generator.next();
 		String y = generator.next();
 
-		System.out.println("Testing with \"" + x + "\", \"" + y + "\"");
-
-		Set<String> answers = new HashSet<String>();
+		Set<String> lcsAnswers = new HashSet<String>();
+		Set<Integer> lcsLengthAnswers = new HashSet<Integer>();
 
 		for (LcsSolver solver : solvers) {
 			solver.setXY(x, y);
@@ -29,20 +28,26 @@ public class Test {
 			String lcs = solver.lcs();
 			int lcsLength = solver.lcsLength();
 
-			System.out.println(lcs + " " + lcsLength);
-			answers.add(lcs);
+			lcsAnswers.add(lcs);
+			lcsLengthAnswers.add(lcsLength);
 		}
 
-		if (answers.size() != 1) {
-			throw new RuntimeException("An answer didn't match!");
+		if (lcsAnswers.size() != 1) {
+			throw new RuntimeException("LCS answers didn't match!");
+		}
+
+		if (lcsLengthAnswers.size() != 1) {
+			throw new RuntimeException("LCS legnth answers didn't match!");
 		}
 	}
 
 	public static void main(String... args) {
-		Test tester = new Test();
+		SanityTest tester = new SanityTest();
+
 		for (int i = 0; i < 50; i++) {
 			tester.test();
-			System.out.println();
 		}
+
+		System.out.println("PASS");
 	}
 }
