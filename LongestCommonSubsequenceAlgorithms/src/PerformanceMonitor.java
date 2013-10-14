@@ -29,10 +29,7 @@ public class PerformanceMonitor {
 		return endTime - startTime;
 	}
 
-	public void reset() {
+	public void resetRecursiveCallCount() {
 		recursiveCallCount = 0;
-
-		startTime = 0;
-		endTime = 0;
 	}
 }

@@ -17,7 +17,7 @@ public class RecursiveMemoization extends LcsSolver {
 	@Override
 	public String lcs() {
 		cache.clear();
-		performanceMonitor.reset();
+		performanceMonitor.resetRecursiveCallCount();
 
 		return lcs(x, y);
 	}
@@ -70,13 +70,13 @@ public class RecursiveMemoization extends LcsSolver {
 		System.out.println("LCS: " + lcs);
 		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
 		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
-		solver.getPerformanceMonitor().reset();
+		solver.getPerformanceMonitor().resetRecursiveCallCount();
 		System.out.println();
 
 		int lcsLength = solver.lcsLength("AGGTAB", "GXTXAYB");
 		System.out.println("LCS length: " + lcsLength);
 		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
 		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
-		solver.getPerformanceMonitor().reset();
+		solver.getPerformanceMonitor().resetRecursiveCallCount();
 	}
 }

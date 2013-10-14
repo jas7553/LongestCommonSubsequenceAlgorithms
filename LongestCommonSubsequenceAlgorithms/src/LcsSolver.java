@@ -23,7 +23,7 @@ public abstract class LcsSolver {
 	public final String lcs(String x, String y) {
 		setXY(x, y);
 
-		performanceMonitor.reset();
+		performanceMonitor.resetRecursiveCallCount();
 		performanceMonitor.startTimer();
 
 		String lcs = lcs();
@@ -36,7 +36,7 @@ public abstract class LcsSolver {
 	public final int lcsLength(String x, String y) {
 		setXY(x, y);
 
-		performanceMonitor.reset();
+		performanceMonitor.resetRecursiveCallCount();
 		performanceMonitor.startTimer();
 
 		int lcsLength = lcsLength();
