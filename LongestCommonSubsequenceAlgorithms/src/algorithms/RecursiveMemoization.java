@@ -1,17 +1,24 @@
+package algorithms;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Jason A Smith <jas7553>
  * 
  */
-public class NaiveRecursive extends LcsSolver {
+public class RecursiveMemoization extends LcsSolver {
 
-	public NaiveRecursive() {
+	private final Map<String, String> cache = new HashMap<String, String>();
+
+	public RecursiveMemoization() {
 		super();
 	}
 
 	@Override
 	protected String lcs() {
+		cache.clear();
+
 		return lcs(x, y);
 	}
 
@@ -24,6 +31,11 @@ public class NaiveRecursive extends LcsSolver {
 
 		if (i == 0 || j == 0) {
 			return "";
+		}
+
+		String key = new StringBuilder().append(x).append("_").append(y).toString();
+		if (cache.containsKey(key)) {
+			return cache.get(key);
 		}
 
 		String lcs;
@@ -41,6 +53,8 @@ public class NaiveRecursive extends LcsSolver {
 			lcs = lcsSub1.length() > lcsSub2.length() ? lcsSub1 : lcsSub2;
 		}
 
+		cache.put(key, lcs);
+
 		return lcs;
 	}
 
@@ -50,7 +64,7 @@ public class NaiveRecursive extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new NaiveRecursive();
+		LcsSolver solver = new RecursiveMemoization();
 
 		String x = "AGGTAB";
 		String y = "GXTXAYB";

@@ -1,5 +1,12 @@
+package project;
 import java.util.HashSet;
 import java.util.Set;
+
+import algorithms.DynamicProgramming;
+import algorithms.LcsSolver;
+import algorithms.NaiveRecursive;
+import algorithms.QuadracticTimeLinearSpace;
+import algorithms.RecursiveMemoization;
 
 /**
  * @author Jason A Smith <jas7553>
@@ -25,7 +32,7 @@ public class SanityTest {
 
 		for (LcsSolver solver : lcsSolvers) {
 			solver.setXY(x, y);
-			String lcs = solver.lcs();
+			String lcs = solver.lcs(x, y);
 			lcsAnswers.add(lcs);
 		}
 
@@ -43,7 +50,7 @@ public class SanityTest {
 
 		for (LcsSolver solver : lcsLengthsolvers) {
 			solver.setXY(x, y);
-			int lcsLength = solver.lcsLength();
+			int lcsLength = solver.lcsLength(x, y);
 			lcsLengthAnswers.add(lcsLength);
 		}
 

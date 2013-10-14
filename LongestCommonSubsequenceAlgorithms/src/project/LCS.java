@@ -1,3 +1,7 @@
+package project;
+import algorithms.LcsSolver;
+import algorithms.NaiveRecursive;
+
 /**
  * @author Jason A Smith <jas7553>
  * 
