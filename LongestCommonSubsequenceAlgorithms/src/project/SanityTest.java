@@ -1,4 +1,5 @@
 package project;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class SanityTest {
 			throw new RuntimeException("LCS answers didn't match!");
 		}
 	}
-	
+
 	public void testLcsLength() {
 		String x = generator.next();
 		String y = generator.next();
