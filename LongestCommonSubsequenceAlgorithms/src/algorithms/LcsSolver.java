@@ -17,7 +17,7 @@ public abstract class LcsSolver {
 	protected PerformanceMonitor performanceMonitor;
 
 	public LcsSolver() {
-		this.performanceMonitor = new PerformanceMonitor();
+		performanceMonitor = new PerformanceMonitor();
 	}
 
 	public final PerformanceMonitor getPerformanceMonitor() {
