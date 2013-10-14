@@ -14,10 +14,6 @@ public class RecursiveMemoization extends LcsSolver {
 		super();
 	}
 
-	public RecursiveMemoization(String x, String y) {
-		super(x, y);
-	}
-
 	public void setXY(String x, String y) {
 		super.setXY(x, y);
 	}
@@ -72,7 +68,8 @@ public class RecursiveMemoization extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new RecursiveMemoization("AGGTAB", "GXTXAYB");
+		LcsSolver solver = new RecursiveMemoization();
+		solver.setXY("AGGTAB", "GXTXAYB");
 
 		String lcs = solver.lcs();
 		System.out.println("LCS: " + lcs);

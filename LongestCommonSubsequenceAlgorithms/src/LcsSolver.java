@@ -13,13 +13,7 @@ public abstract class LcsSolver {
 	protected PerformanceMonitor performanceMonitor;
 
 	public LcsSolver() {
-		this("", "");
-	}
-
-	public LcsSolver(String x, String y) {
 		this.performanceMonitor = new PerformanceMonitor();
-
-		setXY(x, y);
 	}
 
 	public void setXY(String x, String y) {

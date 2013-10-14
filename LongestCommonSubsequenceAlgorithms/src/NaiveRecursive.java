@@ -10,10 +10,6 @@ public class NaiveRecursive extends LcsSolver {
 		super();
 	}
 
-	public NaiveRecursive(String x, String y) {
-		super(x, y);
-	}
-
 	@Override
 	public String lcs() {
 		performanceMonitor.reset();
@@ -60,7 +56,8 @@ public class NaiveRecursive extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new NaiveRecursive("AGGTAB", "GXTXAYB");
+		LcsSolver solver = new NaiveRecursive();
+		solver.setXY("AGGTAB", "GXTXAYB");
 
 		String lcs = solver.lcs();
 		System.out.println("LCS: " + lcs);

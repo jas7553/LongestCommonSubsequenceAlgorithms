@@ -15,10 +15,6 @@ public class DynamicProgramming extends LcsSolver {
 		super();
 	}
 
-	public DynamicProgramming(String x, String y) {
-		super(x, y);
-	}
-
 	@Override
 	public void setXY(String x, String y) {
 		super.setXY(x, y);
@@ -128,7 +124,8 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new DynamicProgramming("AGGTAB", "GXTXAYB");
+		LcsSolver solver = new DynamicProgramming();
+		solver.setXY("AGGTAB", "GXTXAYB");
 
 		String lcs = solver.lcs();
 		System.out.println("LCS: " + lcs);
