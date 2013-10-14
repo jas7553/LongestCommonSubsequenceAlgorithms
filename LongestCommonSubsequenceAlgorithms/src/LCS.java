@@ -23,8 +23,7 @@ public class LCS {
 			long totalTimeElapsed = 0;
 
 			for (int j = 0; j < iterations; j++) {
-				solver.setXY(generator.next(), generator.next());
-				solver.lcs();
+				solver.lcs(generator.next(), generator.next());
 				totalRecursiveCalls += solver.getPerformanceMonitor().getRecursiveCallCount();
 				totalTimeElapsed += solver.getPerformanceMonitor().getElapsedTimeMillis();
 			}

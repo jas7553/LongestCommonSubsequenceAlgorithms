@@ -16,7 +16,37 @@ public abstract class LcsSolver {
 		this.performanceMonitor = new PerformanceMonitor();
 	}
 
-	public void setXY(String x, String y) {
+	public final PerformanceMonitor getPerformanceMonitor() {
+		return performanceMonitor;
+	}
+
+	public final String lcs(String x, String y) {
+		setXY(x, y);
+
+		performanceMonitor.reset();
+		performanceMonitor.startTimer();
+
+		String lcs = lcs();
+
+		performanceMonitor.endTimer();
+
+		return lcs;
+	}
+
+	public final int lcsLength(String x, String y) {
+		setXY(x, y);
+
+		performanceMonitor.reset();
+		performanceMonitor.startTimer();
+
+		int lcsLength = lcsLength();
+
+		performanceMonitor.endTimer();
+
+		return lcsLength;
+	}
+
+	protected final void setXY(String x, String y) {
 		this.x = x.toCharArray();
 		this.y = y.toCharArray();
 
@@ -24,11 +54,7 @@ public abstract class LcsSolver {
 		n = this.y.length;
 	}
 
-	public abstract String lcs();
+	protected abstract String lcs();
 
-	public abstract int lcsLength();
-
-	public PerformanceMonitor getPerformanceMonitor() {
-		return performanceMonitor;
-	}
+	protected abstract int lcsLength();
 }
