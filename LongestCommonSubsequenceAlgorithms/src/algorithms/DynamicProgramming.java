@@ -64,6 +64,7 @@ public class DynamicProgramming extends LcsSolver {
 
 		for (int i = 1; i < m + 1; i++) {
 			for (int j = 1; j < n + 1; j++) {
+				performanceMonitor.makeRecursiveCall();
 				if (x[i - 1] == y[j - 1]) {
 					c[i][j] = c[i - 1][j - 1] + 1;
 					b[i][j] = DIRECTION.UP_LEFT;

@@ -43,6 +43,7 @@ public class QuadracticTimeLinearSpace extends LcsSolver {
 
 		for (int i = 1; i < m + 1; i++) {
 			for (int j = 1; j < n + 1; j++) {
+				performanceMonitor.makeRecursiveCall();
 				if (x[i - 1] == y[j - 1]) {
 					c2[j] = c1[j - 1] + 1;
 				} else if (c2[j - 1] >= c1[j]) {
@@ -74,5 +75,7 @@ public class QuadracticTimeLinearSpace extends LcsSolver {
 
 		System.out.println("LCS: " + lcs);
 		System.out.println("LCS length: " + lcsLength);
+		
+		System.out.println(solver.getPerformanceMonitor().getRecursiveCallCount());
 	}
 }
