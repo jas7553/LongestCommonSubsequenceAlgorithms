@@ -52,17 +52,13 @@ public class NaiveRecursive extends LcsSolver {
 	public static void main(String... args) {
 		LcsSolver solver = new NaiveRecursive();
 
-		String lcs = solver.lcs("AGGTAB", "GXTXAYB");
-		System.out.println("LCS: " + lcs);
-		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
-		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
-		solver.getPerformanceMonitor().resetRecursiveCallCount();
-		System.out.println();
+		String x = "AGGTAB";
+		String y = "GXTXAYB";
 
-		int lcsLength = solver.lcsLength("AGGTAB", "GXTXAYB");
+		String lcs = solver.lcs(x, y);
+		int lcsLength = solver.lcsLength(x, y);
+
+		System.out.println("LCS: " + lcs);
 		System.out.println("LCS length: " + lcsLength);
-		System.out.println("Recusive call count: " + solver.getPerformanceMonitor().getRecursiveCallCount());
-		System.out.println("Took: " + solver.getPerformanceMonitor().getElapsedTimeMillis() + "ms");
-		solver.getPerformanceMonitor().resetRecursiveCallCount();
 	}
 }
