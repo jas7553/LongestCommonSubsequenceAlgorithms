@@ -33,10 +33,12 @@ public class SanityTest {
 		}
 
 		if (lcsAnswers.size() != 1) {
+			System.err.println(lcsAnswers.toString());
 			throw new RuntimeException("LCS answers didn't match!");
 		}
 
 		if (lcsLengthAnswers.size() != 1) {
+			System.err.println(lcsLengthAnswers.toString());
 			throw new RuntimeException("LCS legnth answers didn't match!");
 		}
 	}
