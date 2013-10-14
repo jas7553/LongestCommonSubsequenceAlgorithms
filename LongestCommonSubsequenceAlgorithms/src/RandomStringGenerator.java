@@ -17,11 +17,13 @@ public class RandomStringGenerator implements Iterator<String> {
 
 	public RandomStringGenerator(char[] alphabet, int size) {
 		this.alphabet = alphabet;
+		this.size = size;
 		this.randomNumberGenerator = new Random();
 	}
 
 	public RandomStringGenerator(char[] alphabet, int size, long seed) {
 		this.alphabet = alphabet;
+		this.size = size;
 		this.randomNumberGenerator = new Random(seed);
 	}
 
