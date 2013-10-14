@@ -1,4 +1,5 @@
 package project;
+
 import algorithms.LcsSolver;
 import algorithms.NaiveRecursive;
 
