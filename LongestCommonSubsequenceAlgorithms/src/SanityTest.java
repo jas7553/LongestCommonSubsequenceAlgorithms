@@ -7,37 +7,49 @@ import java.util.Set;
  */
 public class SanityTest {
 
-	private LcsSolver[] solvers;
+	private LcsSolver[] lcsSolvers;
+	private LcsSolver[] lcsLengthsolvers;
 	private RandomStringGenerator generator;
 
 	public SanityTest() {
-		solvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming() };
+		lcsSolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming() };
+		lcsLengthsolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new QuadracticTimeLinearSpace() };
 		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 10);
 	}
 
-	public void test() {
+	public void testLcs() {
 		String x = generator.next();
 		String y = generator.next();
 
 		Set<String> lcsAnswers = new HashSet<String>();
-		Set<Integer> lcsLengthAnswers = new HashSet<Integer>();
 
-		for (LcsSolver solver : solvers) {
+		for (LcsSolver solver : lcsSolvers) {
 			solver.setXY(x, y);
-
 			String lcs = solver.lcs();
-			int lcsLength = solver.lcsLength();
-
 			lcsAnswers.add(lcs);
-			lcsLengthAnswers.add(lcsLength);
 		}
 
 		if (lcsAnswers.size() != 1) {
 			System.err.println(lcsAnswers.toString());
 			throw new RuntimeException("LCS answers didn't match!");
 		}
+	}
+	
+	public void testLcsLength() {
+		String x = generator.next();
+		String y = generator.next();
+
+		Set<Integer> lcsLengthAnswers = new HashSet<Integer>();
+
+		for (LcsSolver solver : lcsLengthsolvers) {
+			solver.setXY(x, y);
+			int lcsLength = solver.lcsLength();
+			lcsLengthAnswers.add(lcsLength);
+		}
 
 		if (lcsLengthAnswers.size() != 1) {
+			System.err.println(x);
+			System.err.println(y);
 			System.err.println(lcsLengthAnswers.toString());
 			throw new RuntimeException("LCS legnth answers didn't match!");
 		}
@@ -47,7 +59,8 @@ public class SanityTest {
 		SanityTest tester = new SanityTest();
 
 		for (int i = 0; i < 50; i++) {
-			tester.test();
+			tester.testLcs();
+			tester.testLcsLength();
 		}
 
 		System.out.println("PASS");
