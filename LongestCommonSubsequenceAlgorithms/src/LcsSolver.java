@@ -46,7 +46,7 @@ public abstract class LcsSolver {
 		return lcsLength;
 	}
 
-	protected final void setXY(String x, String y) {
+	public final void setXY(String x, String y) {
 		this.x = x.toCharArray();
 		this.y = y.toCharArray();
 
