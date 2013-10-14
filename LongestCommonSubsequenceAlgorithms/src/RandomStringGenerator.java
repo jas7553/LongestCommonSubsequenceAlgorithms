@@ -4,25 +4,33 @@ import java.util.Random;
 public class RandomStringGenerator implements Iterator<String> {
 
 	private char[] alphabet;
-	private int size = 5;
+	private int size;
 	private final Random randomNumberGenerator;
 
 	public RandomStringGenerator(char[] alphabet) {
-		this.alphabet = alphabet;
-		randomNumberGenerator = new Random();
+		this(alphabet, 5);
 	}
 
-	public RandomStringGenerator(char[] alphabet, int seed) {
-		this.alphabet = alphabet;
-		randomNumberGenerator = new Random(seed);
+	public RandomStringGenerator(char[] alphabet, long seed) {
+		this(alphabet, 5, seed);
 	}
 
-	public void setStringSize(int size) {
-		this.size = size;
+	public RandomStringGenerator(char[] alphabet, int size) {
+		this.alphabet = alphabet;
+		this.randomNumberGenerator = new Random();
+	}
+
+	public RandomStringGenerator(char[] alphabet, int size, long seed) {
+		this.alphabet = alphabet;
+		this.randomNumberGenerator = new Random(seed);
 	}
 
 	public void setAlphabet(char[] alphabet) {
 		this.alphabet = alphabet;
+	}
+
+	public void setStringSize(int size) {
+		this.size = size;
 	}
 
 	@Override
