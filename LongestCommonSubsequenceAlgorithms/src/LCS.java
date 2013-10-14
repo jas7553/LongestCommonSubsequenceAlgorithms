@@ -6,9 +6,10 @@ public class LCS {
 
 	public static void main(String[] args) {
 		LcsSolver solver = new NaiveRecursive();
+		PerformanceMonitor performanceMonitor = solver.getPerformanceMonitor();
 
 		char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
-		RandomStringGenerator generator = new RandomStringGenerator(alphabet);
+		RandomStringGenerator generator = new RandomStringGenerator(alphabet, (long) 123);
 
 		int iterations = 100;
 		int minLength = 1;
@@ -24,8 +25,9 @@ public class LCS {
 
 			for (int j = 0; j < iterations; j++) {
 				solver.lcs(generator.next(), generator.next());
-				totalRecursiveCalls += solver.getPerformanceMonitor().getRecursiveCallCount();
-				totalTimeElapsed += solver.getPerformanceMonitor().getElapsedTimeMillis();
+
+				totalRecursiveCalls += performanceMonitor.getRecursiveCallCount();
+				totalTimeElapsed += performanceMonitor.getElapsedTimeMillis();
 			}
 
 			int averageRecursiveCalls = totalRecursiveCalls / iterations;
