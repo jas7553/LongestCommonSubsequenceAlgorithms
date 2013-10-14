@@ -15,7 +15,7 @@ public class RecursiveMemoization extends LcsSolver {
 	}
 
 	@Override
-	public String lcs() {
+	protected String lcs() {
 		cache.clear();
 
 		return lcs(x, y);
@@ -58,7 +58,7 @@ public class RecursiveMemoization extends LcsSolver {
 	}
 
 	@Override
-	public int lcsLength() {
+	protected int lcsLength() {
 		return lcs().length();
 	}
 

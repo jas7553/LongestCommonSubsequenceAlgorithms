@@ -45,7 +45,7 @@ public class NaiveRecursive extends LcsSolver {
 	}
 
 	@Override
-	public int lcsLength() {
+	protected int lcsLength() {
 		return lcs().length();
 	}
 

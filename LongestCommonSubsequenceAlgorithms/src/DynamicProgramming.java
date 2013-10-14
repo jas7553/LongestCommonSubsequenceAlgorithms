@@ -16,7 +16,7 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	@Override
-	public String lcs() {
+	protected String lcs() {
 		buildTables();
 		return lcs(x.length, y.length);
 	}
@@ -39,7 +39,7 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	@Override
-	public int lcsLength() {
+	protected int lcsLength() {
 		buildTables();
 		return c[m][n];
 	}
