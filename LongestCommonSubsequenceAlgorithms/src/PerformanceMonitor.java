@@ -17,6 +17,10 @@ public class PerformanceMonitor {
 		return recursiveCallCount;
 	}
 
+	public void resetRecursiveCallCount() {
+		recursiveCallCount = 0;
+	}
+
 	public void startTimer() {
 		startTime = System.currentTimeMillis();
 	}
@@ -27,9 +31,5 @@ public class PerformanceMonitor {
 
 	public long getElapsedTimeMillis() {
 		return endTime - startTime;
-	}
-
-	public void resetRecursiveCallCount() {
-		recursiveCallCount = 0;
 	}
 }
