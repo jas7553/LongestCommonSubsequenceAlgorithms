@@ -16,7 +16,7 @@ public class LCS {
 		char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
 		RandomStringGenerator generator = new RandomStringGenerator(alphabet, (long) 123);
 
-		int iterations = 100;
+		int iterations = 1000;
 		int minLength = 1;
 		int maxLength = 15;
 

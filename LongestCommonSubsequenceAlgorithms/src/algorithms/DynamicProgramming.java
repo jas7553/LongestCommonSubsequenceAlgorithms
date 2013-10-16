@@ -13,10 +13,6 @@ public class DynamicProgramming extends LcsSolver {
 	private DIRECTION[][] b;
 	private int[][] c;
 
-	public DynamicProgramming() {
-		super();
-	}
-
 	@Override
 	protected String lcs() {
 		buildTables();
@@ -79,7 +75,7 @@ public class DynamicProgramming extends LcsSolver {
 		}
 	}
 
-	public void displayS() {
+	public void displayC() {
 		System.out.print("  j ");
 		for (int i = 0; i < c[0].length; i++) {
 			System.out.print(i + " ");
@@ -108,7 +104,7 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		LcsSolver solver = new DynamicProgramming();
+		DynamicProgramming solver = new DynamicProgramming();
 
 		String x = "AGGTAB";
 		String y = "GXTXAYB";
@@ -116,6 +112,8 @@ public class DynamicProgramming extends LcsSolver {
 		String lcs = solver.lcs(x, y);
 		int lcsLength = solver.lcsLength(x, y);
 
+		solver.displayC();
+		
 		System.out.println("LCS: " + lcs);
 		System.out.println("LCS length: " + lcsLength);
 	}

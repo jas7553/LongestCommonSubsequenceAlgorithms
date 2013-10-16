@@ -11,10 +11,6 @@ public class QuadracticTimeLinearSpace extends LcsSolver {
 	private int[] c1;
 	private int[] c2;
 
-	public QuadracticTimeLinearSpace() {
-		super();
-	}
-
 	@Override
 	protected String lcs() {
 		// TODO Can the quadratic time linear space algorithm even compute the LCS??

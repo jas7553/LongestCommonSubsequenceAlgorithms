@@ -12,10 +12,6 @@ public class RecursiveMemoization extends LcsSolver {
 
 	private final Map<String, String> cache = new HashMap<String, String>();
 
-	public RecursiveMemoization() {
-		super();
-	}
-
 	@Override
 	protected String lcs() {
 		cache.clear();

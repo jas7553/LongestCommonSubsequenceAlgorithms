@@ -22,7 +22,7 @@ public class SanityTest {
 	public SanityTest() {
 		lcsSolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming() };
 		lcsLengthsolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new QuadracticTimeLinearSpace() };
-		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 10);
+		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 12);
 	}
 
 	public void testLcs() {
@@ -32,7 +32,7 @@ public class SanityTest {
 		Set<String> lcsAnswers = new HashSet<String>();
 
 		for (LcsSolver solver : lcsSolvers) {
-			solver.setXY(x, y);
+//			solver.setXY(x, y);
 			String lcs = solver.lcs(x, y);
 			lcsAnswers.add(lcs);
 		}
@@ -50,7 +50,6 @@ public class SanityTest {
 		Set<Integer> lcsLengthAnswers = new HashSet<Integer>();
 
 		for (LcsSolver solver : lcsLengthsolvers) {
-			solver.setXY(x, y);
 			int lcsLength = solver.lcsLength(x, y);
 			lcsLengthAnswers.add(lcsLength);
 		}

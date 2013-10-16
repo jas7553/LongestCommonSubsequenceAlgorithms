@@ -8,10 +8,6 @@ import java.util.Arrays;
  */
 public class NaiveRecursive extends LcsSolver {
 
-	public NaiveRecursive() {
-		super();
-	}
-
 	@Override
 	protected String lcs() {
 		return lcs(x, y);
