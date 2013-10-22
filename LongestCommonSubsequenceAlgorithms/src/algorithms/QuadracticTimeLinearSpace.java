@@ -6,6 +6,7 @@ import java.util.Arrays;
  * @author Jason A Smith <jas7553>
  * 
  */
+@Deprecated
 public class QuadracticTimeLinearSpace extends LcsSolver {
 
 	private int[] c1;
