@@ -104,7 +104,7 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	public static void main(String... args) {
-		DynamicProgramming solver = new DynamicProgramming();
+		LcsSolver solver = new DynamicProgramming();
 
 		String x = "AGGTAB";
 		String y = "GXTXAYB";
@@ -112,8 +112,6 @@ public class DynamicProgramming extends LcsSolver {
 		String lcs = solver.lcs(x, y);
 		int lcsLength = solver.lcsLength(x, y);
 
-		solver.displayC();
-		
 		System.out.println("LCS: " + lcs);
 		System.out.println("LCS length: " + lcsLength);
 	}

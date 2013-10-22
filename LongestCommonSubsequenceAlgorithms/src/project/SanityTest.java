@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import algorithms.DynamicProgramming;
+import algorithms.Hirschberg;
 import algorithms.LcsSolver;
 import algorithms.NaiveRecursive;
-import algorithms.QuadracticTimeLinearSpace;
 import algorithms.RecursiveMemoization;
 
 /**
@@ -20,8 +20,8 @@ public class SanityTest {
 	private RandomStringGenerator generator;
 
 	public SanityTest() {
-		lcsSolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming() };
-		lcsLengthsolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new QuadracticTimeLinearSpace() };
+		lcsSolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new Hirschberg() };
+		lcsLengthsolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new Hirschberg() };
 		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 12);
 	}
 
@@ -29,18 +29,39 @@ public class SanityTest {
 		String x = generator.next();
 		String y = generator.next();
 
-		Set<String> lcsAnswers = new HashSet<String>();
+		Set<Integer> lcsAnswers = new HashSet<Integer>();
 
 		for (LcsSolver solver : lcsSolvers) {
-//			solver.setXY(x, y);
 			String lcs = solver.lcs(x, y);
-			lcsAnswers.add(lcs);
+			if (!verifyLcs(x, y, lcs)) {
+				throw new RuntimeException("Solver did not generate valid LCS!");
+			}
+			lcsAnswers.add(lcs.length());
 		}
 
 		if (lcsAnswers.size() != 1) {
+			System.err.println(x);
+			System.err.println(y);
 			System.err.println(lcsAnswers.toString());
-			throw new RuntimeException("LCS answers didn't match!");
+			throw new RuntimeException("Lengths of LCS answers don't all match!");
 		}
+	}
+
+	private static boolean verifyLcs(String x, String y, String lcs) {
+		return existsIn(lcs, x) && existsIn(lcs, y);
+	}
+
+	private static boolean existsIn(String lcs, String s) {
+		int i = 0;
+		for (int j = 0; j < s.length(); j++) {
+			if (s.charAt(j) == lcs.charAt(i)) {
+				i++;
+				if (i == lcs.length()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void testLcsLength() {
