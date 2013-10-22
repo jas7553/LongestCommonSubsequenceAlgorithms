@@ -15,26 +15,29 @@ import algorithms.RecursiveMemoization;
  */
 public class SanityTest {
 
-	private LcsSolver[] lcsSolvers;
-	private LcsSolver[] lcsLengthsolvers;
-	private RandomStringGenerator generator;
+	private LcsSolver[] solvers;
+	private RandomStringGenerator stringGenerator;
 
 	public SanityTest() {
-		lcsSolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new Hirschberg() };
-		lcsLengthsolvers = new LcsSolver[] { new NaiveRecursive(), new RecursiveMemoization(), new DynamicProgramming(), new Hirschberg() };
-		generator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 12);
+		solvers = new LcsSolver[] { new NaiveRecursive(), 
+									new RecursiveMemoization(),
+									new DynamicProgramming(),
+									new Hirschberg() };
+		stringGenerator = new RandomStringGenerator(new char[] { 'A', 'C', 'G', 'T' }, 12);
 	}
 
 	public void testLcs() {
-		String x = generator.next();
-		String y = generator.next();
+		String x = stringGenerator.next();
+		String y = stringGenerator.next();
 
 		Set<Integer> lcsAnswers = new HashSet<Integer>();
 
-		for (LcsSolver solver : lcsSolvers) {
+		for (LcsSolver solver : solvers) {
 			String lcs = solver.lcs(x, y);
-			if (!verifyLcs(x, y, lcs)) {
-				throw new RuntimeException("Solver did not generate valid LCS!");
+			if (!verifyCommonSubsequence(x, y, lcs)) {
+				System.err.println(x);
+				System.err.println(y);
+				throw new RuntimeException("Solver did not generate a valid common subsequence!");
 			}
 			lcsAnswers.add(lcs.length());
 		}
@@ -47,10 +50,17 @@ public class SanityTest {
 		}
 	}
 
-	private static boolean verifyLcs(String x, String y, String lcs) {
-		return existsIn(lcs, x) && existsIn(lcs, y);
+	/**
+	 * Subsequence is a common subsequence of x and y if subsequence is a subset
+	 * of both x and y.
+	 */
+	private static boolean verifyCommonSubsequence(String x, String y, String subsequence) {
+		return existsIn(subsequence, x) && existsIn(subsequence, y);
 	}
 
+	/**
+	 * @return True iff lcs is a subset of s.
+	 */
 	private static boolean existsIn(String lcs, String s) {
 		int i = 0;
 		for (int j = 0; j < s.length(); j++) {
@@ -65,12 +75,12 @@ public class SanityTest {
 	}
 
 	public void testLcsLength() {
-		String x = generator.next();
-		String y = generator.next();
+		String x = stringGenerator.next();
+		String y = stringGenerator.next();
 
 		Set<Integer> lcsLengthAnswers = new HashSet<Integer>();
 
-		for (LcsSolver solver : lcsLengthsolvers) {
+		for (LcsSolver solver : solvers) {
 			int lcsLength = solver.lcsLength(x, y);
 			lcsLengthAnswers.add(lcsLength);
 		}
@@ -86,8 +96,13 @@ public class SanityTest {
 	public static void main(String... args) {
 		SanityTest tester = new SanityTest();
 
-		for (int i = 0; i < 50; i++) {
+		// test the lcs() function repeatedly
+		for (int i = 0; i < 100; i++) {
 			tester.testLcs();
+		}
+
+		// test the lcsLength() function repeatedly
+		for (int i = 0; i < 100; i++) {
 			tester.testLcsLength();
 		}
 
