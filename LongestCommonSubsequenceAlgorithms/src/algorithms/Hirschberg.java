@@ -2,6 +2,10 @@ package algorithms;
 
 import java.util.Arrays;
 
+/**
+ * @author Jason A Smith <jas7553>
+ * 
+ */
 public class Hirschberg extends LcsSolver {
 
 	@Override
