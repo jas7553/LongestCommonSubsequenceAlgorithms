@@ -18,6 +18,8 @@ public class Hirschberg extends LcsSolver {
 	}
 
 	private String lcs(int m, int n, char[] x, char[] y) {
+		performanceMonitor.makeRecursiveCall();
+
 		// 1. If problem is trivial, solve it
 		if (n == 0) {
 			return "";
