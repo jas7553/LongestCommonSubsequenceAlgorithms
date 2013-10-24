@@ -5,6 +5,10 @@ import java.io.IOException;
 import algorithms.Hirschberg;
 import algorithms.LcsSolver;
 
+/**
+ * @author Jason A Smith <jas7553>
+ * 
+ */
 public class FindLargestInputWithTimeConstraint {
 
 	private static final long TIME_LIMIT_MS = 10 * 1000;
