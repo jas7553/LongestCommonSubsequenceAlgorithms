@@ -106,11 +106,11 @@ public class Hirschberg extends LcsSolver {
 
 		String x = "AGGTAB";
 		String y = "GXTXAYB";
-
+ 
 		String lcs = solver.lcs(x, y);
-		int lcsLength = solver.lcsLength(x, y);
+//		int lcsLength = solver.lcsLength(x, y);
 
-		System.out.println("LCS: " + lcs);
-		System.out.println("LCS length: " + lcsLength);
+//		System.out.println("LCS: " + lcs);
+//		System.out.println("LCS length: " + lcsLength);
 	}
 }
