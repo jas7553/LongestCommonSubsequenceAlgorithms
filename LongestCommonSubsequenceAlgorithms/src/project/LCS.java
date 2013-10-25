@@ -8,7 +8,7 @@ import algorithms.RecursiveMemoization;
 
 /**
  * @author Jason A Smith <jas7553>
- * 
+ *
  */
 public class LCS {
 
