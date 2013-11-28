@@ -1,5 +1,7 @@
 package project;
 
+import tools.PerformanceMonitor;
+import tools.RandomStringGenerator;
 import algorithms.DynamicProgramming;
 import algorithms.Hirschberg;
 import algorithms.LcsSolver;

@@ -1,6 +1,6 @@
 package algorithms;
 
-import project.PerformanceMonitor;
+import tools.PerformanceMonitor;
 
 /**
  * @author Jason A Smith <jas7553>

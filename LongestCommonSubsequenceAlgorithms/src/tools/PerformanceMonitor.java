@@ -1,4 +1,4 @@
-package project;
+package tools;
 
 /**
  * @author Jason A Smith <jas7553>

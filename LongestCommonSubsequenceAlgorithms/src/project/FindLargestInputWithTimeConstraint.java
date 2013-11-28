@@ -2,6 +2,7 @@ package project;
 
 import java.io.IOException;
 
+import tools.RandomStringGenerator;
 import algorithms.Hirschberg;
 import algorithms.LcsSolver;
 
