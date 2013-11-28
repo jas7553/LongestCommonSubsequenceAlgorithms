@@ -1,5 +1,6 @@
 package project;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -23,8 +24,20 @@ public class LCS {
 	private char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
 	private RandomStringGenerator generator = new RandomStringGenerator(alphabet);
 
-	public void run(LcsSolver solver, int iterations, int minLength, int maxLength, int delta, PrintWriter writer) {
-		System.out.println(solver.getClass().getSimpleName());
+	public void run(LcsSolver solver, int iterations, int minLength, int maxLength, int delta) {
+		String solverName = solver.getClass().getSimpleName();
+
+		PrintWriter writer;
+
+		try {
+			String filename = "results" + File.separator + solverName + "_" + iterations + "_" + minLength + "_" + maxLength + "_" + delta + ".csv";
+			writer = new PrintWriter(filename, "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		System.out.println(solverName);
 		System.out.println("String size | Avg recursive calls | Avg elapsed time (ms)");
 		System.out.println("------------+---------------------+----------------------");
 
@@ -46,7 +59,10 @@ public class LCS {
 			long averageElapsedTime = totalTimeElapsed / iterations;
 
 			System.out.printf("%11d |%20d |%22d\n", i, averageRecursiveCalls, averageElapsedTime);
+			writer.write(i + "," + averageRecursiveCalls + "," + averageElapsedTime + "\n");
 		}
+
+		writer.close();
 	}
 
 	public static void usage() {
@@ -81,19 +97,7 @@ public class LCS {
 			delta = Integer.parseInt(args[4]);
 		}
 
-		PrintWriter writer;
-
-		try {
-			String filename = args[0] + "_" + iterations + "_" + minLength + "_" + maxLength + "_" + delta + ".csv";
-			writer = new PrintWriter(filename, "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return;
-		}
-
 		LCS tester = new LCS();
-		tester.run(solver, iterations, minLength, maxLength, delta, writer);
-
-		writer.close();
+		tester.run(solver, iterations, minLength, maxLength, delta);
 	}
 }
