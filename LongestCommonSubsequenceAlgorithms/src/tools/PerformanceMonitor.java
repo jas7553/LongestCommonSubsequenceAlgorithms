@@ -6,7 +6,7 @@ package tools;
  */
 public class PerformanceMonitor {
 
-	private int recursiveCallCount = 0;
+	private long recursiveCallCount = 0;
 
 	private long startTime = 0;
 	private long endTime = 0;
@@ -15,7 +15,7 @@ public class PerformanceMonitor {
 		recursiveCallCount += 1;
 	}
 
-	public int getRecursiveCallCount() {
+	public long getRecursiveCallCount() {
 		return recursiveCallCount;
 	}
 

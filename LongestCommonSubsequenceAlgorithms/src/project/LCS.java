@@ -1,5 +1,9 @@
 package project;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import tools.PerformanceMonitor;
 import tools.RandomStringGenerator;
 import algorithms.DynamicProgramming;
@@ -10,7 +14,7 @@ import algorithms.RecursiveMemoization;
 
 /**
  * @author Jason A Smith <jas7553>
- *
+ * 
  */
 public class LCS {
 
@@ -19,7 +23,7 @@ public class LCS {
 	private char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
 	private RandomStringGenerator generator = new RandomStringGenerator(alphabet);
 
-	public void run(LcsSolver solver, int iterations, int minLength, int maxLength, int delta) {
+	public void run(LcsSolver solver, int iterations, int minLength, int maxLength, int delta, PrintWriter writer) {
 		System.out.println(solver.getClass().getSimpleName());
 		System.out.println("String size | Avg recursive calls | Avg elapsed time (ms)");
 		System.out.println("------------+---------------------+----------------------");
@@ -27,7 +31,7 @@ public class LCS {
 		for (int i = minLength; i <= maxLength; i += delta) {
 			generator.setStringSize(i);
 
-			int totalRecursiveCalls = 0;
+			long totalRecursiveCalls = 0;
 			long totalTimeElapsed = 0;
 
 			for (int j = 0; j < iterations; j++) {
@@ -38,7 +42,7 @@ public class LCS {
 				totalTimeElapsed += performanceMonitor.getElapsedTimeMillis();
 			}
 
-			int averageRecursiveCalls = totalRecursiveCalls / iterations;
+			long averageRecursiveCalls = totalRecursiveCalls / iterations;
 			long averageElapsedTime = totalTimeElapsed / iterations;
 
 			System.out.printf("%11d |%20d |%22d\n", i, averageRecursiveCalls, averageElapsedTime);
@@ -77,7 +81,19 @@ public class LCS {
 			delta = Integer.parseInt(args[4]);
 		}
 
+		PrintWriter writer;
+
+		try {
+			String filename = args[0] + "_" + iterations + "_" + minLength + "_" + maxLength + "_" + delta + ".csv";
+			writer = new PrintWriter(filename, "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return;
+		}
+
 		LCS tester = new LCS();
-		tester.run(solver, iterations, minLength, maxLength, delta);
+		tester.run(solver, iterations, minLength, maxLength, delta, writer);
+
+		writer.close();
 	}
 }
