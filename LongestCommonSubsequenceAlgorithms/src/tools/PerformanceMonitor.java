@@ -13,9 +13,6 @@ public class PerformanceMonitor {
 
 	private long recursiveCallCount = 0;
 
-	private long startTime = 0;
-	private long endTime = 0;
-
 	private static final int START_TIME = 0;
 	private static final int END_TIME = 1;
 
@@ -31,21 +28,6 @@ public class PerformanceMonitor {
 
 	public void resetRecursiveCallCount() {
 		recursiveCallCount = 0;
-	}
-
-	@Deprecated
-	public void startTimer() {
-		startTime = System.currentTimeMillis();
-	}
-
-	@Deprecated
-	public void endTimer() {
-		endTime = System.currentTimeMillis();
-	}
-
-	@Deprecated
-	public long getElapsedTimeMillis() {
-		return endTime - startTime;
 	}
 
 	public void startTimer(String timerId) {
