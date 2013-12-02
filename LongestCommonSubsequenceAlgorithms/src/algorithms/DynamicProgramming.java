@@ -20,20 +20,27 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	private String lcs(int i, int j) {
-		if (i == 0 || j == 0) {
-			return "";
+		StringBuilder lcs = new StringBuilder();
+
+		while (i != 0 && j != 0) {
+			switch (b[i][j]) {
+			case UP_LEFT:
+				lcs.insert(0, x[i - 1]);
+				i = i - 1;
+				j = j - 1;
+				break;
+			case UP:
+				i = i - 1;
+				break;
+			case LEFT:
+				j = j - 1;
+				break;
+			default:
+				throw new RuntimeException("Should not happen");
+			}
 		}
 
-		switch (b[i][j]) {
-		case UP_LEFT:
-			return lcs(i - 1, j - 1) + x[i - 1];
-		case UP:
-			return lcs(i - 1, j);
-		case LEFT:
-			return lcs(i, j - 1);
-		default:
-			throw new RuntimeException("Should not happen");
-		}
+		return lcs.toString();
 	}
 
 	@Override
