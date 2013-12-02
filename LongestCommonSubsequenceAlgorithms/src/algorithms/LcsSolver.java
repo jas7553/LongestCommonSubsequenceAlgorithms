@@ -28,11 +28,11 @@ public abstract class LcsSolver {
 		setXY(x, y);
 
 		performanceMonitor.resetRecursiveCallCount();
-		performanceMonitor.startTimer();
+		performanceMonitor.startTimer("lcs");
 
 		String lcs = lcs();
 
-		performanceMonitor.endTimer();
+		performanceMonitor.endTimer("lcs");
 
 		return lcs;
 	}
@@ -41,11 +41,11 @@ public abstract class LcsSolver {
 		setXY(x, y);
 
 		performanceMonitor.resetRecursiveCallCount();
-		performanceMonitor.startTimer();
+		performanceMonitor.startTimer("lcsLength");
 
 		int lcsLength = lcsLength();
 
-		performanceMonitor.endTimer();
+		performanceMonitor.endTimer("lcsLength");
 
 		return lcsLength;
 	}
