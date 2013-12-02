@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import tools.PerformanceMonitor;
 import tools.RandomStringGenerator;
 import algorithms.DynamicProgramming;
 import algorithms.Hirschberg;
@@ -50,9 +49,8 @@ public class LCS {
 			for (int j = 0; j < iterations; j++) {
 				solver.lcs(generator.next(), generator.next());
 
-				PerformanceMonitor performanceMonitor = solver.getPerformanceMonitor();
-				totalRecursiveCalls += performanceMonitor.getRecursiveCallCount();
-				totalTimeElapsed += performanceMonitor.getElapsedTimeMillis();
+				totalRecursiveCalls += solver.getRecursiveCallCount();
+				totalTimeElapsed += solver.getLcsElapsedTimeMillis();
 			}
 
 			long averageRecursiveCalls = totalRecursiveCalls / iterations;

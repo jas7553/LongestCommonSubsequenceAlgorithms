@@ -20,8 +20,16 @@ public abstract class LcsSolver {
 		performanceMonitor = new PerformanceMonitor();
 	}
 
-	public final PerformanceMonitor getPerformanceMonitor() {
-		return performanceMonitor;
+	public long getLcsElapsedTimeMillis() {
+		return performanceMonitor.getElapsedTimeMillis("lcs");
+	}
+
+	public long getLcsLengthElapsedTimeMillis() {
+		return performanceMonitor.getElapsedTimeMillis("lcsLength");
+	}
+
+	public long getRecursiveCallCount() {
+		return performanceMonitor.getRecursiveCallCount();
 	}
 
 	public final String lcs(String x, String y) {
