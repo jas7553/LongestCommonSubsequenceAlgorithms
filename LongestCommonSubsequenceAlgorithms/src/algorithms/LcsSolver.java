@@ -16,16 +16,14 @@ public abstract class LcsSolver {
 
 	protected PerformanceMonitor performanceMonitor;
 
+	private String timerName;
+
 	public LcsSolver() {
 		performanceMonitor = new PerformanceMonitor();
 	}
 
-	public long getLcsElapsedTimeMillis() {
-		return performanceMonitor.getElapsedTimeMillis("lcs");
-	}
-
-	public long getLcsLengthElapsedTimeMillis() {
-		return performanceMonitor.getElapsedTimeMillis("lcsLength");
+	public long getElapsedTimeMillis() {
+		return performanceMonitor.getElapsedTimeMillis(timerName);
 	}
 
 	public long getRecursiveCallCount() {
@@ -41,6 +39,7 @@ public abstract class LcsSolver {
 		String lcs = lcs();
 
 		performanceMonitor.endTimer("lcs");
+		timerName = "lcs";
 
 		return lcs;
 	}
@@ -54,6 +53,7 @@ public abstract class LcsSolver {
 		int lcsLength = lcsLength();
 
 		performanceMonitor.endTimer("lcsLength");
+		timerName = "lcsLength";
 
 		return lcsLength;
 	}

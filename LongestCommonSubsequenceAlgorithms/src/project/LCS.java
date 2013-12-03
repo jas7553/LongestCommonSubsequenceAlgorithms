@@ -50,7 +50,7 @@ public class LCS {
 				solver.lcs(generator.next(), generator.next());
 
 				totalRecursiveCalls += solver.getRecursiveCallCount();
-				totalTimeElapsed += solver.getLcsElapsedTimeMillis();
+				totalTimeElapsed += solver.getElapsedTimeMillis();
 			}
 
 			long averageRecursiveCalls = totalRecursiveCalls / iterations;
