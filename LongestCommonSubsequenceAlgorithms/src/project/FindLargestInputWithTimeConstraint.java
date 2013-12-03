@@ -16,12 +16,14 @@ import algorithms.LcsSolver;
  */
 public class FindLargestInputWithTimeConstraint {
 
+	private static final String USAGE = "Usage: FindLargestInputWithTimeConstraint [NaiveRecursive|RecursiveMemoization|DynamicProgramming|Hirschberg] iterations initialInputSize [delta]";
+
 	private static final long TIME_LIMIT_MS = 10 * 1000;
 
 	private char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
 	private RandomStringGenerator generator = new RandomStringGenerator(alphabet);
 
-	public int test(LcsSolver solver, int initialInputSize, int delta) throws IOException {
+	public int test(LcsSolver solver, int iterations, int initialInputSize, int delta) throws IOException {
 		long time = 0;
 		int inputSize = initialInputSize;
 
@@ -43,16 +45,16 @@ public class FindLargestInputWithTimeConstraint {
 			generator.setStringSize(inputSize);
 
 			long avgTime = 0;
-			int repititions = 5;
-			for (int i = 0; i < repititions; i++) {
+			for (int i = 0; i < iterations; i++) {
 				solver.lcsLength(generator.next(), generator.next());
 				avgTime += solver.getElapsedTimeMillis();
 				System.gc();
 				try {
 					Thread.sleep(2);
-				} catch (InterruptedException e) {}
+				} catch (InterruptedException e) {
+				}
 			}
-			time = (avgTime / repititions);
+			time = (avgTime / iterations);
 
 			System.out.println(inputSize + "\t" + time);
 			writer.write(inputSize + "," + time + "\n");
@@ -68,16 +70,16 @@ public class FindLargestInputWithTimeConstraint {
 	public static void main(String[] args) throws IOException {
 		FindLargestInputWithTimeConstraint tester = new FindLargestInputWithTimeConstraint();
 
-//		 tester.test(new NaiveRecursive(), 10, 1);
+//		 tester.test(new NaiveRecursive(), 5, 10, 1);
 //		 System.out.println();
 
-//		 tester.test(new RecursiveMemoization(), 400, 10);
+//		 tester.test(new RecursiveMemoization(), 5, 400, 10);
 //		 System.out.println();
 
-//		 tester.test(new DynamicProgramming(), 10, 10);
+//		 tester.test(new DynamicProgramming(), 5, 10, 10);
 //		 System.out.println();
 
-		tester.test(new Hirschberg(), 20000, 500);
+		tester.test(new Hirschberg(), 5, 20000, 500);
 		System.out.println();
 	}
 }
