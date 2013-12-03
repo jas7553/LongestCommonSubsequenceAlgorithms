@@ -2,13 +2,15 @@ package project;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import tools.RandomStringGenerator;
+import algorithms.DynamicProgramming;
 import algorithms.Hirschberg;
 import algorithms.LcsSolver;
+import algorithms.NaiveRecursive;
+import algorithms.RecursiveMemoization;
 
 /**
  * @author Jason A Smith <jas7553>
@@ -23,7 +25,7 @@ public class TimeConstraint {
 	private char[] alphabet = new char[] { 'A', 'C', 'G', 'T' };
 	private RandomStringGenerator generator = new RandomStringGenerator(alphabet);
 
-	public int test(LcsSolver solver, int iterations, int initialInputSize, int delta) throws IOException {
+	public int run(LcsSolver solver, int iterations, int initialInputSize, int delta) {
 		long time = 0;
 		int inputSize = initialInputSize;
 
@@ -39,7 +41,7 @@ public class TimeConstraint {
 			throw new RuntimeException(e);
 		}
 
-		System.out.println(solver.getClass().getSimpleName());
+		System.out.println(solverName);
 		System.out.println("Input size\tTime (ms)");
 		while (time < TIME_LIMIT_MS) {
 			generator.setStringSize(inputSize);
@@ -50,14 +52,15 @@ public class TimeConstraint {
 				avgTime += solver.getElapsedTimeMillis();
 				System.gc();
 				try {
-					Thread.sleep(2);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 				}
 			}
 			time = (avgTime / iterations);
 
 			System.out.println(inputSize + "\t" + time);
-			writer.write(inputSize + "," + time + "\n");
+			writer.println(inputSize + "," + time);
+			writer.flush();
 
 			inputSize += delta;
 		}
@@ -67,19 +70,45 @@ public class TimeConstraint {
 		return inputSize;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void usage() {
+		System.out.println(USAGE);
+		System.exit(0);
+	}
+
+	/**
+	 * NaiveRecursive 5 10 1
+	 * RecursiveMemoization 5 400 10
+	 * DynamicProgramming 5 10 10
+	 * Hirschberg 5 20000 500
+	 */
+	public static void main(String[] args) {
+		if (args.length < 3 || args.length > 4) {
+			usage();
+		}
+
+		LcsSolver solver = null;
+		switch (args[0]) {
+		case "NaiveRecursive":
+			solver = new NaiveRecursive(); break;
+		case "RecursiveMemoization":
+			solver = new RecursiveMemoization(); break;
+		case "DynamicProgramming":
+			solver = new DynamicProgramming(); break;
+		case "Hirschberg":
+			solver = new Hirschberg(); break;
+		default:
+			usage();
+		}
+
+		int iterations = Integer.parseInt(args[1]);
+		int initialInputSize = Integer.parseInt(args[2]);
+
+		int delta = 1;
+		if (args.length == 4) {
+			delta = Integer.parseInt(args[3]);
+		}
+
 		TimeConstraint tester = new TimeConstraint();
-
-//		 tester.test(new NaiveRecursive(), 5, 10, 1);
-//		 System.out.println();
-
-//		 tester.test(new RecursiveMemoization(), 5, 400, 10);
-//		 System.out.println();
-
-//		 tester.test(new DynamicProgramming(), 5, 10, 10);
-//		 System.out.println();
-
-		tester.test(new Hirschberg(), 5, 20000, 500);
-		System.out.println();
+		tester.run(solver, iterations, initialInputSize, delta);
 	}
 }
