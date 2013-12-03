@@ -14,9 +14,9 @@ import algorithms.LcsSolver;
  * @author Jason A Smith <jas7553>
  * 
  */
-public class FindLargestInputWithTimeConstraint {
+public class TimeConstraint {
 
-	private static final String USAGE = "Usage: FindLargestInputWithTimeConstraint [NaiveRecursive|RecursiveMemoization|DynamicProgramming|Hirschberg] iterations initialInputSize [delta]";
+	private static final String USAGE = "Usage: TimeConstraint [NaiveRecursive|RecursiveMemoization|DynamicProgramming|Hirschberg] iterations initialInputSize [delta]";
 
 	private static final long TIME_LIMIT_MS = 10 * 1000;
 
@@ -68,7 +68,7 @@ public class FindLargestInputWithTimeConstraint {
 	}
 
 	public static void main(String[] args) throws IOException {
-		FindLargestInputWithTimeConstraint tester = new FindLargestInputWithTimeConstraint();
+		TimeConstraint tester = new TimeConstraint();
 
 //		 tester.test(new NaiveRecursive(), 5, 10, 1);
 //		 System.out.println();
