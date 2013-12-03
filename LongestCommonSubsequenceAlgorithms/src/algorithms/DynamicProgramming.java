@@ -6,11 +6,16 @@ package algorithms;
  */
 public class DynamicProgramming extends LcsSolver {
 
-	private static enum DIRECTION {
-		LEFT, UP, UP_LEFT;
-	}
+//	private static enum DIRECTION {
+//		LEFT, UP, UP_LEFT;
+//	}
 
-	private DIRECTION[][] b;
+	private static final int LEFT = 0;
+	private static final int UP = 1;
+	private static final int UP_LEFT = 2;
+
+//	private DIRECTION[][] b;
+	private int[][] b;
 	private int[][] c;
 
 	@Override
@@ -50,7 +55,8 @@ public class DynamicProgramming extends LcsSolver {
 	}
 
 	private void clearTables() {
-		b = new DIRECTION[m + 1][n + 1];
+//		b = new DIRECTION[m + 1][n + 1];
+		b = new int[m + 1][n + 1];
 		c = new int[m + 1][n + 1];
 	}
 
@@ -70,13 +76,16 @@ public class DynamicProgramming extends LcsSolver {
 				performanceMonitor.makeRecursiveCall();
 				if (x[i - 1] == y[j - 1]) {
 					c[i][j] = c[i - 1][j - 1] + 1;
-					b[i][j] = DIRECTION.UP_LEFT;
+//					b[i][j] = DIRECTION.UP_LEFT;
+					b[i][j] = UP_LEFT;
 				} else if (c[i - 1][j] >= c[i][j - 1]) {
 					c[i][j] = c[i - 1][j];
-					b[i][j] = DIRECTION.UP;
+//					b[i][j] = DIRECTION.UP;
+					b[i][j] = UP;
 				} else {
 					c[i][j] = c[i][j - 1];
-					b[i][j] = DIRECTION.LEFT;
+//					b[i][j] = DIRECTION.LEFT;
+					b[i][j] = LEFT;
 				}
 			}
 		}
