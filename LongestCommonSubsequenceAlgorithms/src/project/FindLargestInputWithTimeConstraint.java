@@ -7,8 +7,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import tools.RandomStringGenerator;
+import algorithms.Hirschberg;
 import algorithms.LcsSolver;
-import algorithms.NaiveRecursive;
 
 /**
  * @author Jason A Smith <jas7553>
@@ -40,19 +40,24 @@ public class FindLargestInputWithTimeConstraint {
 		System.out.println(solver.getClass().getSimpleName());
 		System.out.println("Input size\tTime (ms)");
 		while (time < TIME_LIMIT_MS) {
-			inputSize += delta;
 			generator.setStringSize(inputSize);
 
 			long avgTime = 0;
-			int repititions = 10;
+			int repititions = 5;
 			for (int i = 0; i < repititions; i++) {
-				solver.lcs(generator.next(), generator.next());
-				avgTime += solver.getPerformanceMonitor().getElapsedTimeMillis();
+				solver.lcsLength(generator.next(), generator.next());
+				avgTime += solver.getElapsedTimeMillis();
+				System.gc();
+				try {
+					Thread.sleep(2);
+				} catch (InterruptedException e) {}
 			}
 			time = (avgTime / repititions);
 
 			System.out.println(inputSize + "\t" + time);
 			writer.write(inputSize + "," + time + "\n");
+
+			inputSize += delta;
 		}
 
 		writer.close();
@@ -63,16 +68,16 @@ public class FindLargestInputWithTimeConstraint {
 	public static void main(String[] args) throws IOException {
 		FindLargestInputWithTimeConstraint tester = new FindLargestInputWithTimeConstraint();
 
-		 tester.test(new NaiveRecursive(), 10, 1);
-		 System.out.println();
+//		 tester.test(new NaiveRecursive(), 10, 1);
+//		 System.out.println();
 
 //		 tester.test(new RecursiveMemoization(), 400, 10);
 //		 System.out.println();
 
-//		 tester.test(new DynamicProgramming(), 3800, 100);
+//		 tester.test(new DynamicProgramming(), 10, 10);
 //		 System.out.println();
 
-//		tester.test(new Hirschberg(), 25400, 20);
-//		System.out.println();
+		tester.test(new Hirschberg(), 20000, 500);
+		System.out.println();
 	}
 }
